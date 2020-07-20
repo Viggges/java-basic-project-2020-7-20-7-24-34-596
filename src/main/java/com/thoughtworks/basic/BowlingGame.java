@@ -22,8 +22,11 @@ public class BowlingGame {
     }
 
     public int getScore() {
-
-        return currentFrame.getScore();
+        int total=0;
+        for(Frame f:frames){
+            total+=f.getScore();
+        }
+        return total;
     }
 
     public boolean isEnd() {

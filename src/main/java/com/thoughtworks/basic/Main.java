@@ -10,7 +10,7 @@ public class Main {
 
         while (!bowlingGame.isEnd()){
             bowlingGame.roll(scanner.nextInt());
-            bowlingGame.getScore();
+            System.out.println("总分："+bowlingGame.getScore());
             System.out.println(bowlingGame.showFramesScore());
         }
     }
