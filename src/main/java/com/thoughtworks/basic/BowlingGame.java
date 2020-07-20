@@ -23,9 +23,16 @@ public class BowlingGame {
 
     public int getScore() {
         int total=0;
-        for(Frame f:frames){
-            total+=f.getScore();
+        for(int i=0;i<frames.size();i++){
+            Frame f = frames.get(i);
+            if(f.getScore()==10&&i<frames.size()-1){
+                total+=f.getScore();
+                total+=frames.get(i+1).getRolls().get(0);
+            }else{
+                total+=f.getScore();
+            }
         }
+
         return total;
     }
 
@@ -40,10 +47,14 @@ public class BowlingGame {
 
         StringBuilder sb = new StringBuilder();
         for(int i=0;i<frames.size();i++){
+            int score = frames.get(i).getScore();
+            if(score==10&&i<frames.size()-1){
+                score+=frames.get(i+1).getRolls().get(0);
+            }
             if(i==0){
-                sb.append(String.valueOf(frames.get(i).getScore()));
+                sb.append(String.valueOf(score));
             }else{
-                sb.append(String.valueOf("|"+frames.get(i).getScore()));
+                sb.append(String.valueOf("|"+score));
             }
         }
         return sb.toString();

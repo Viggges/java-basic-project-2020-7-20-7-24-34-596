@@ -9,18 +9,24 @@ public class Frame {
         this.rolls = rolls;
     }
 
-    public void roll(int hits){
+    public List<Integer> getRolls() {
+        return rolls;
+    }
+
+    public void roll(int hits) {
         rolls.add(new Integer(hits));
     }
-    public int getScore(){
+
+    public int getScore() {
         int total = 0;
-        for(Integer score:rolls){
-            total+=score;
+        for (Integer score : rolls) {
+            total += score;
         }
         return total;
     }
-    public boolean isEnd(){
-        if(rolls.size()>=2){
+
+    public boolean isEnd() {
+        if (rolls.size() >= 2) {
             return true;
         }
         return false;
