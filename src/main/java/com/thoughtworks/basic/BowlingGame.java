@@ -14,7 +14,15 @@ public class BowlingGame {
     }
 
     public void roll(int hits) {
-        if(currentFrame.isEnd()){
+        if (currentFrame.isEnd()) {
+            if (frames.size() == 10 && frames.get(9).getScore() == 10) {
+                currentFrame = new Frame(new ArrayList<Integer>() {
+                    {
+                        add(0);
+                    }
+                });
+                frames.add(currentFrame);
+            }
             currentFrame = new Frame(new ArrayList<>());
             frames.add(currentFrame);
         }
@@ -22,14 +30,14 @@ public class BowlingGame {
     }
 
     public int getScore() {
-        int total=0;
-        for(int i=0;i<frames.size();i++){
+        int total = 0;
+        for (int i = 0; i < frames.size(); i++) {
             Frame f = frames.get(i);
-            if(f.getScore()==10&&i<frames.size()-1){
-                total+=f.getScore();
-                total+=frames.get(i+1).getRolls().get(0);
-            }else{
-                total+=f.getScore();
+            if (f.getScore() == 10 && i < frames.size() - 1) {
+                total += f.getScore();
+                total += frames.get(i + 1).getRolls().get(0);
+            } else {
+                total += f.getScore();
             }
         }
 
@@ -37,7 +45,10 @@ public class BowlingGame {
     }
 
     public boolean isEnd() {
-        if (frames.size() >= 10) {
+        if (frames.size() >= 10 && currentFrame.isEnd()) {
+            if (currentFrame.getScore() == 10) {
+                return false;
+            }
             return true;
         }
         return false;
@@ -46,15 +57,15 @@ public class BowlingGame {
     public String showFramesScore() {
 
         StringBuilder sb = new StringBuilder();
-        for(int i=0;i<frames.size();i++){
+        for (int i = 0; i < frames.size(); i++) {
             int score = frames.get(i).getScore();
-            if(score==10&&i<frames.size()-1){
-                score+=frames.get(i+1).getRolls().get(0);
+            if (score == 10 && i < frames.size() - 1) {
+                score += frames.get(i + 1).getRolls().get(0);
             }
-            if(i==0){
+            if (i == 0) {
                 sb.append(String.valueOf(score));
-            }else{
-                sb.append(String.valueOf("|"+score));
+            } else {
+                sb.append(String.valueOf("|" + score));
             }
         }
         return sb.toString();
